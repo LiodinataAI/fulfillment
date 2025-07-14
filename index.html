@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOP Ops Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- MarkerCluster CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-sans">
+  <!-- ================= HEADER ================= -->
+  <header class="custom-header-bg p-4 shadow relative flex items-center justify-between">
+    <!-- Left : hamburger + title -->
+    <div class="flex items-center">
+      <button id="menu-toggle" class="mr-4 text-white custom-header-bg p-2 rounded-md focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <h1 class="text-2xl font-bold">NOP Ops Dashboard</h1>
+    </div>
+    <!-- Right : user menu -->
+    <div class="relative">
+      <button id="user-menu" class="text-white bg-gray-700 hover:bg-gray-600 p-2 rounded-md focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4.992 4.992 0 0010 20a4.992 4.992 0 004.879-2.196M15 11a3 3 0 00-6 0m6 0a3 3 0 11-6 0" /></svg>
+      </button>
+      <!-- dropdown -->
+      <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+        <div class="px-4 py-3 border-b">
+          <p class="text-sm font-semibold">Profile</p>
+          <p class="text-xs text-gray-600">Akun: <span class="font-medium">Master</span></p>
+          <p class="text-xs text-gray-600">NIK: 950001</p>
+        </div>
+        <ul class="py-2"><li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Setting</a></li></ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= SIDEBAR ================= -->
+  <div id="sidebar" class="fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+    <div class="p-4 border-b"><h2 class="text-xl font-bold">Menu</h2></div>
+    <ul class="p-4 space-y-4">
+      <li><a href="#" class="block text-blue-800 font-semibold hover:underline">Site Map</a></li>
+      <li><a href="#" class="block text-blue-800 font-semibold hover:underline">Fulfillment</a></li>
+      <li><a href="#" class="block text-blue-800 font-semibold hover:underline">Assurance</a></li>
+    </ul>
+  </div>
+
+  <!-- ================= MAIN ================= -->
+  <main class="flex-1 p-0 relative">
+    <!-- Search bar overlay -->
+    <div class="search-bar-wrapper absolute top-4 left-1/2 -translate-x-1/2 transform flex justify-center z-40">
+      <div class="flex items-center gap-2 bg-white shadow p-2 rounded-md">
+        <input id="search-input" type="text" placeholder="Masukkan koordinat (contoh: -0.02,109.34)" class="border px-2 py-1 rounded-md w-64 text-sm" />
+        <button id="search-btn" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 text-sm">Cari</button>
+      </div>
+    </div>
+
+    <!-- Filter layer -->
+<div id="layer-filter" class="absolute top-20 left-1/2 -translate-x-1/2 transform z-40
+                             bg-white shadow p-2 rounded-md flex items-center gap-2 text-sm">
+  <label class="inline-flex items-center gap-1">
+    <input type="checkbox" id="toggle-sites" class="accent-blue-600" checked />
+    <span>Site GeoJSON</span>
+  </label>
+</div>
+
+
+    <!-- Map -->
+    <div id="map" class="w-full h-full"></div>
+  </main>
+
+  <!-- ================= JS ================= -->
+  <script src="script.js" defer></script>
+</body>
+</html>
